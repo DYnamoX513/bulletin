@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @ApiModel("用户信息")
 @Data
 public class User {
@@ -27,4 +29,7 @@ public class User {
 
     @ApiModelProperty(value = "年龄", example = "20")
     private short age;
+
+    @ApiModelProperty(value = "新闻发布")
+    private List<News> news;
 }

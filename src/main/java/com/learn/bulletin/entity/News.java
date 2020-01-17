@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @ApiModel("新闻信息")
 @Data
 public class News {
@@ -21,5 +23,8 @@ public class News {
     private String content;
 
     @ApiModelProperty(value = "所属栏目" , example = "Financial")
-    private Integer column_id;
+    private Column column;
+
+    @ApiModelProperty(value = "拥有标签")
+    private List<Tag> tags;
 }
