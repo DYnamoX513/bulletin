@@ -2,10 +2,8 @@ package com.learn.bulletin.dao;
 
 import com.learn.bulletin.entity.Tag;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface TagDao {
@@ -15,10 +13,6 @@ public interface TagDao {
     @Select("SELECT * FROM tags WHERE news_id = #{news_id}")
     List<Tag> getTagsByNews(@Param("news_id") int id);
 
-//    @Select("SELECT * FROM tags WHERE tag = #{tag}")
-//    List<Tag> getTagsByName(@Param("tag") String tag);
-
-//    @SelectProvider(type = TagDaoProvider.class, method = "getTagsByNames")
     @Select(
             {"<script>",
                     "SELECT * FROM tags where tag in ",

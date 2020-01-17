@@ -28,9 +28,9 @@ public class NewsController {
         return newsService.getNewsById(id);
     }
 
-    @GetMapping("/news/column/{column_id}")
-    public List<News> getNewsByColumn(@PathVariable("column_id") int id) {
-        return newsService.getNewsByColumn(id);
+    @GetMapping("/news/column/{column}")
+    public List<News> getNewsByColumn(@PathVariable("column") String column) {
+        return newsService.getNewsByColumn(column);
     }
 
     @GetMapping("/news/tags/{tag}")

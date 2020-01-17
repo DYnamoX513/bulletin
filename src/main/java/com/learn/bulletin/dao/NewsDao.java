@@ -3,7 +3,6 @@ package com.learn.bulletin.dao;
 import com.learn.bulletin.entity.News;
 import com.learn.bulletin.entity.Tag;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
@@ -16,6 +15,15 @@ public interface NewsDao {
      * @return News集合
      */
     @Select("SELECT * FROM news WHERE user_id = #{user_id}")
+    @Results(
+            {
+                    @Result(property = "news_id",column = "news_id"),
+                    @Result(property = "column",column = "column_id",
+                            one = @One(select = "com.learn.bulletin.dao.ColumnDao.getColumnById")),
+                    @Result(property = "tags",column = "news_id",
+                            many = @Many(select = "com.learn.bulletin.dao.TagDao.getTagsByNews")),
+            }
+    )
     List<News> getNewsByUser(@Param("user_id") int id);
 
     /**
@@ -24,32 +32,34 @@ public interface NewsDao {
      * @return News
      */
     @Select("SELECT * FROM news WHERE news_id = #{news_id}")
+    @Results(
+            {
+                    @Result(property = "news_id",column = "news_id"),
+                    @Result(property = "column",column = "column_id",
+                            one = @One(select = "com.learn.bulletin.dao.ColumnDao.getColumnById")),
+                    @Result(property = "tags",column = "news_id",
+                            many = @Many(select = "com.learn.bulletin.dao.TagDao.getTagsByNews")),
+            }
+    )
     News getNewsById(@Param("news_id") int id);
 
     /**
-     * 获取属于column_id栏目的新闻
-     * @param id column_id
+     * 获取属于某一栏目的新闻
+     * @param column 栏目
      * @return News集合
      */
-    @Select("SELECT * FROM news WHERE column_id = #{column_id}")
-    List<News> getNewsByColumn(@Param("column_id") int id);
-
-
-    /**
-     * 获取多个id对应的新闻
-     * @param id_list 多个news_id
-     * @return  News集合
-     */
-
-    @Select(
-            {"<script>",
-                    "SELECT * FROM news where news_id in ",
-                    "<foreach collection=\"id_list\" item=\"id\" index=\"index\" open=\"(\" separator=\",\" close=\")\">",
-                    "#{id}",
-                    "</foreach>",
-                    "</script>"}
+    @Select("SELECT * FROM news n LEFT JOIN columns c " +
+            "ON n.column_id = c.column_id " +
+            "WHERE c.content = #{column}")
+    @Results(
+            {
+                    @Result(property = "news_id",column = "news_id"),
+                    @Result(property = "tags",column = "news_id",
+                            many = @Many(select = "com.learn.bulletin.dao.TagDao.getTagsByNews")),
+            }
     )
-    List<News> getMultiNewsById(@Param("id_list") List<Integer> id_list);
+    List<News> getNewsByColumn(@Param("column") String column);
+
 
     @Select(
             {"<script>",

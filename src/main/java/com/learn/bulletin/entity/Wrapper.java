@@ -3,9 +3,6 @@ package com.learn.bulletin.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import springfox.documentation.annotations.ApiIgnore;
-
-import java.util.Map;
 
 @ApiModel("Api返回")
 @Data

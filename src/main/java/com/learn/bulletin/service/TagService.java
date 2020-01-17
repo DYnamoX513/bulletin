@@ -26,11 +26,6 @@ public class TagService implements TagDao {
         return tagDao.getTagsByNews(id);
     }
 
-//    @Override
-//    public List<Tag> getTagsByName(String tag) {
-//        return tagDao.getTagsByName(tag);
-//    }
-
     @Override
     public List<Tag> getTagsByNames(List<String> tags) {
         return tagDao.getTagsByNames(tags);

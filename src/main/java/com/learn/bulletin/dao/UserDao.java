@@ -74,4 +74,14 @@ public interface UserDao {
     @Delete("DELETE from users WHERE user_id = #{id}")
     int deleteUser(@Param("id") int id);
 
+    @Select("SELECT * FROM users WHERE user_id = #{id}")
+    @Results(
+            {
+                    @Result(property = "user_id",column = "user_id"),
+                    @Result(property = "news",column = "user_id",
+                    many = @Many(select = "com.learn.bulletin.dao.NewsDao.getNewsByUser"))
+            }
+    )
+    User getUserNews(@Param("id") int id);
+
 }

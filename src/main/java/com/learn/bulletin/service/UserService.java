@@ -66,4 +66,9 @@ public class UserService implements UserDao {
     public int deleteUser(int id) {
         return userDao.deleteUser(id);
     }
+
+    @Override
+    public User getUserNews(int id) {
+        return userDao.getUserNews(id);
+    }
 }

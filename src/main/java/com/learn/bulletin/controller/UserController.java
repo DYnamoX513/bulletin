@@ -103,6 +103,13 @@ public class UserController {
         return new Wrapper<>(1000,"删除成功",null);
     }
 
+    @ApiOperation("获取用户发布的新闻")
+    @ApiImplicitParam(name = "user_id" ,value = "用户ID", paramType = "path", required = true, dataType = "int")
+    @GetMapping("/user/{user_id}/news")
+    public User getUserNews(@PathVariable("user_id") Integer id) {
+        return userService.getUserNews(id);
+    }
+
     //TODO: 用户登录及授权
 //    @ApiOperation("用户登录")
 //    @ApiImplicitParam(name = "user", value = "用户ID，用户名，密码", paramType = "body",  dataType = "User")

@@ -28,13 +28,8 @@ public class NewsService implements NewsDao {
     }
 
     @Override
-    public List<News> getNewsByColumn(int id) {
-        return newsDao.getNewsByColumn(id);
-    }
-
-    @Override
-    public List<News> getMultiNewsById(List<Integer> id_list) {
-        return newsDao.getMultiNewsById(id_list);
+    public List<News> getNewsByColumn(String column) {
+        return newsDao.getNewsByColumn(column);
     }
 
     @Override
