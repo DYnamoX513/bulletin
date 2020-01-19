@@ -8,6 +8,7 @@ import com.learn.bulletin.exception.ErrorCode;
 import com.learn.bulletin.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,19 +45,38 @@ public class TagController {
     }
 
     @ApiOperation("为某条新闻添加一条标签")
-    @PostMapping("/tags")
-    public Wrapper<Tag> addNewsTag(@RequestBody Tag tag) {
+    @ApiImplicitParam(name = "news_id", value = "新闻ID", paramType = "path", required = true, dataType = "int")
+    @PostMapping("/tags/{news_id}")
+    public Wrapper<Tag> addNewsTag(@PathVariable("news_id") int id,@RequestBody Tag tag) {
+        tag.setNews_id(id);
         if (tagService.addNewTag(tag) == 0) {
             throw new BaseException(ErrorCode.INSERT_FAILED,ImmutableMap.of("news_id",tag.getNews_id(),"tag",tag),null);
         }
         return new Wrapper<>(1000,"添加成功",tag);
     }
 
-//    @PutMapping("/tags")
+    @ApiOperation("修改新闻的一条标签")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "news_id", value = "新闻ID", paramType = "path", required = true, dataType = "int"),
+                    @ApiImplicitParam(name = "old_tag", value = "旧标签值", paramType = "query", required = true, dataType = "String")
+            }
+    )
+    @PutMapping("/tags/{news_id}")
+    public Wrapper<Tag> modifyTag(@PathVariable("news_id") int id,@RequestBody Tag tag,@RequestParam("old_tag") String oldTag) {
+        int result = tagService.updateTag(id,oldTag,tag.getTag());
+        if (result == 0){
+            throw new BaseException(ErrorCode.UPDATE_FAILED,ImmutableMap.of("news_id",id,"old_tag",oldTag,"new_tag",tag.getTag()),null);
+        }
+        tag.setNews_id(id);
+        return new Wrapper<>(1000,"修改成功",tag);
+    }
 
     @ApiOperation("删除新闻的一条标签")
-    @DeleteMapping("/tags")
-    public Wrapper<Tag> deleteTag(@RequestBody Tag tag) {
+    @ApiImplicitParam(name = "news_id", value = "新闻ID", paramType = "path", required = true, dataType = "int")
+    @DeleteMapping("/tags/{news_id}")
+    public Wrapper<Tag> deleteTag(@PathVariable("news_id") int id,@RequestBody Tag tag) {
+        tag.setNews_id(id);
         if (tagService.deleteTag(tag) == 0) {
             throw new BaseException(ErrorCode.DELETE_FAILED,ImmutableMap.of("news_id",tag.getNews_id(),"tag",tag),null);
         }

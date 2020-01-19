@@ -31,4 +31,7 @@ public interface TagDao {
 
     @Delete("Delete FROM tags WHERE news_id = #{news_id} AND tag = #{tag}")
     int deleteTag(Tag tag);
+
+    @Delete("DELETE FROM tags WHERE news_id = #{news_id}")
+    int resetTag(@Param("news_id") int id);
 }

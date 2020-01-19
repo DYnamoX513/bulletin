@@ -71,8 +71,16 @@ public interface NewsDao {
     )
     List<News> getMultiNewsByIdFromTags(@Param("tags") List<Tag> tags);
 
+    @Options(useGeneratedKeys = true, keyProperty = "news_id", keyColumn = "news_id")
     @Insert("INSERT INTO news(user_id,title,content,column_id)" +
-            " VALUES(#{user_id},#{title},#{content},#{column_id})")
+            " VALUES(#{user_id},#{title},#{content},#{column.column_id})")
     int addNews(News news);
 
+    @Update("UPDATE news SET title = #{title}, content = #{content}, column_id = #{column.column_id} " +
+            "WHERE news_id = #{news_id}")
+    int modifyNews(News news);
+
+    @Update("UPDATE news SET title = #{title}, content = #{content} " +
+            "WHERE news_id = #{news_id}")
+    int modifyNewsContent(News news);
 }

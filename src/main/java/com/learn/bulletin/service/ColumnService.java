@@ -67,9 +67,9 @@ public class ColumnService implements ColumnDao{
             throw new BaseException(ErrorCode.DUPLICATED_COLUMN, ImmutableMap.of("column",column.getContent()),null);
         }
         try{
-            tempTableService.preventDuplicated("column",20,column.getContent());
+            tempTableService.preventDuplicated("temp_column",20,column.getContent());
         }catch (RuntimeException ex) {
-            throw new BaseException(ErrorCode.DUPLICATED_MOBILE,ImmutableMap.of("column",column.getContent()),ex.getCause());
+            throw new BaseException(ErrorCode.DUPLICATED_COLUMN,ImmutableMap.of("column",column.getContent()),ex.getCause());
         }
     }
 }

@@ -14,7 +14,9 @@ public enum ErrorCode {
     INSERT_FAILED(1007,"添加失败"),
 
     DUPLICATED_COLUMN(2001,"栏目名称重复"),
-    DUPLICATED_TAG(2002,"标签重复");
+    DUPLICATED_TAG(2002,"标签重复"),
+    COLUMN_NOT_EXIST(2003,"未找到栏目"),
+    NEWS_NOT_EXIST(2004,"未找到新闻");
 
     private final int code;
 

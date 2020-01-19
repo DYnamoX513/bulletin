@@ -12,4 +12,10 @@ public class Column {
 
     @ApiModelProperty(value = "栏目名称",example = "international")
     private String content;
+
+    public Column(){}
+
+    public Column(String content){
+        this.content = content;
+    }
 }

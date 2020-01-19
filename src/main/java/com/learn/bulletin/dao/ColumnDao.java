@@ -14,11 +14,11 @@ public interface ColumnDao {
     @Select("SELECT * FROM columns WHERE column_id = #{column_id}")
     Column getColumnById(@Param("column_id") int id);
 
-    @Select("SELECT * FROM columns WHERE cotent = #{content}")
+    @Select("SELECT * FROM columns WHERE content = #{content}")
     Column getColumnByName(@Param("content") String content);
 
     @Options(useGeneratedKeys = true, keyProperty = "column_id", keyColumn = "column_id")
-    @Insert({"INSERT INTO columns(content) VALUES(#{content}"})
+    @Insert({"INSERT INTO columns(content) VALUES(#{content})"})
     int addColumn(Column column);
 
     @Update("UPDATE columns SET content = #{content} WHERE column_id = #{column_id}")

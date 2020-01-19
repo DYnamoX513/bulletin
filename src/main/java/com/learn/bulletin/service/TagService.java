@@ -53,4 +53,9 @@ public class TagService implements TagDao {
     public int deleteTag(Tag tag) {
         return tagDao.deleteTag(tag);
     }
+
+    @Override
+    public int resetTag(int id) {
+        return tagDao.resetTag(id);
+    }
 }
