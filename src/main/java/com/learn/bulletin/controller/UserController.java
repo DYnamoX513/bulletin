@@ -63,7 +63,7 @@ public class UserController {
     }
 
     //TODO: 部分信息唯一性
-    @ApiOperation(("修改用户信息(密码无效)"))
+    @ApiOperation(("修改用户信息(除密码)"))
     @ApiImplicitParam(name = "user_id", value = "用户id",paramType = "path", required = true,dataType = "int")
     @PutMapping("/users/{user_id}/name")
     public Wrapper<User> modifyInfo(@PathVariable("user_id") Integer id, @RequestBody User user) {
@@ -140,6 +140,3 @@ class UserPasswordInfo{
         newPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
     }
 }
-
-
-

@@ -16,7 +16,8 @@ public enum ErrorCode {
     DUPLICATED_COLUMN(2001,"栏目名称重复"),
     DUPLICATED_TAG(2002,"标签重复"),
     COLUMN_NOT_EXIST(2003,"未找到栏目"),
-    NEWS_NOT_EXIST(2004,"未找到新闻");
+    NEWS_NOT_EXIST(2004,"未找到新闻"),
+    USER_NOT_EXIST(2005,"未找到用户");
 
     private final int code;
 

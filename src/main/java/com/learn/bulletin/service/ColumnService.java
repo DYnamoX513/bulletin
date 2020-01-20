@@ -56,7 +56,6 @@ public class ColumnService implements ColumnDao{
         return columnDao.deleteColumn(id);
     }
 
-    @Transactional
     @Override
     public int setColumnDefault(int id) {
         return columnDao.setColumnDefault(id);

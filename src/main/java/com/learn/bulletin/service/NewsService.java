@@ -20,9 +20,13 @@ public class NewsService implements NewsDao {
     private NewsDao newsDao;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private TagService tagService;
 
-    @Autowired ColumnService columnService;
+    @Autowired
+    private ColumnService columnService;
 
     @Override
     public List<News> getNewsByUser(int id) {
@@ -47,6 +51,9 @@ public class NewsService implements NewsDao {
     @Transactional
     @Override
     public int addNews(News news) {
+        if(userService.getUserById(news.getUser_id()) == null){
+            throw new BaseException(ErrorCode.USER_NOT_EXIST,ImmutableMap.of("user_id",news.getUser_id()),null);
+        }
         Column c = columnService.getColumnByName(news.getColumn().getContent());
         if(c == null){
             throw new BaseException(ErrorCode.COLUMN_NOT_EXIST, ImmutableMap.of("column",news.getColumn().getContent()),null);
@@ -71,6 +78,11 @@ public class NewsService implements NewsDao {
     @Override
     public int modifyNewsContent(News news) {
         return newsDao.modifyNewsContent(news);
+    }
+
+    @Override
+    public int deleteNews(int id) {
+        return newsDao.deleteNews(id);
     }
 
     @Transactional

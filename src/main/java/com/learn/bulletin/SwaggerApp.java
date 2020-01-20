@@ -1,6 +1,6 @@
 package com.learn.bulletin;
 
-import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
+//import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -143,8 +143,8 @@ public class SwaggerApp {
                 .build();
     }
 
-    @Bean
-    KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver(){
-        return new KeycloakSpringBootConfigResolver();
-    }
+//    @Bean
+//    KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver(){
+//        return new KeycloakSpringBootConfigResolver();
+//    }
 }

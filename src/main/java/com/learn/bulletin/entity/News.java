@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @ApiModel("新闻信息")
@@ -27,4 +28,11 @@ public class News {
 
     @ApiModelProperty(value = "拥有标签")
     private List<Tag> tags;
+
+    @ApiModelProperty(hidden = true ,example = "0")
+    private Date publish_time;
+
+    @ApiModelProperty(hidden = true ,example = "0")
+    private Date update_time;
+
 }
