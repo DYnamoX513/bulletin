@@ -1,5 +1,6 @@
 package com.learn.bulletin.config;
 
+import com.learn.bulletin.service.UserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,15 +23,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public UserDetailsService simpleUserDetailsService(){
-//        return new UserDetailsServiceImpl();
-//    }
+    @Bean
+    public UserDetailsService simpleUserDetailsService(){
+        return new UserDetailService();
+    }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(simpleUserDetailsService());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(simpleUserDetailsService());
+    }
 
     @Override
     @Bean

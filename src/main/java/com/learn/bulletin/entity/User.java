@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class User {
     @ApiModelProperty(hidden = true,example = "0")
-    private Integer user_id;
+    private Long user_id;
 
     @ApiModelProperty(value = "用户名", example = "jack")
     private String user_name;

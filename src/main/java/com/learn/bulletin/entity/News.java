@@ -12,10 +12,10 @@ import java.util.List;
 public class News {
 
     @ApiModelProperty(value = "所属用户id",example = "0")
-    private Integer user_id;
+    private Long user_id;
 
     @ApiModelProperty(hidden = true ,example = "0")
-    private Integer news_id;
+    private Long news_id;
 
     @ApiModelProperty(value = "新闻标题", example = "Title")
     private String title;
